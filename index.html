@@ -15,7 +15,11 @@
   <header class="site-header">
     <a class="brand" href="#home" aria-label="Go to home">DS<span>•</span> Learn</a>
     <p class="header-student">Abraham T. Araya III · Bestlink College of the Philippines · BSIT 21010 · Sir Arjohn Palermo · 2026</p>
-    <nav class="site-nav" aria-label="Main navigation">
+    <!-- The menu button appears on phones to keep the sticky header compact. -->
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+      <span aria-hidden="true">☰</span><span>Menu</span>
+    </button>
+    <nav class="site-nav" id="primaryNav" aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#week7">Week 7-8</a>
       <a href="#week9">Week 9</a>
