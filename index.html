@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A beginner-friendly C++ Data Structures learning website for Weeks 7 to 11." />
+  <title>C++ Data Structures | Abraham T. Araya III</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sticky navigation: each link scrolls to a lesson section. -->
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Go to home">DS<span>•</span> Learn</a>
+    <p class="header-student">Abraham T. Araya III · Bestlink College of the Philippines · BSIT 21010 · Sir Arjohn Palermo · 2026</p>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#week7">Week 7-8</a>
+      <a href="#week9">Week 9</a>
+      <a href="#week10">Week 10-11</a>
+      <a href="#how-to-use">How to Use</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch color theme">
+      <span aria-hidden="true">☾</span><span id="themeText">Dark</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">BEGINNER-FRIENDLY C++ LESSONS · WEEKS 7–11</p>
+        <h1>C++ Data <span>Structures</span></h1>
+        <p class="hero-intro">Learn how linked lists and queues organize data. Read the lesson, copy a C++ sample, then use the JavaScript demos to see each operation happen.</p>
+        <div class="student-card">
+          <p><strong>Abraham T. Araya III</strong></p>
+          <p>Bestlink College of the Philippines · BSIT 21010</p>
+          <p>Submitted to: Sir Arjohn Palermo · 2026</p>
+        </div>
+        <a class="button button-primary" href="#week7">Start learning <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-visual" aria-label="Data structure illustration">
+        <div class="visual-label">DATA MOVES WITH A PURPOSE</div>
+        <div class="mini-nodes">
+          <div class="mini-node"><small>HEAD</small><b>10</b></div><i>→</i>
+          <div class="mini-node"><small>NODE</small><b>20</b></div><i>→</i>
+          <div class="mini-node accent"><small>REAR</small><b>30</b></div>
+        </div>
+        <div class="queue-line"><span>FRONT</span><div class="line-fill"></div><span>REAR</span></div>
+        <p>Lists connect items. Queues arrange them.</p>
+      </div>
+    </section>
+
+    <section class="lesson-links section" aria-label="Lesson overview">
+      <div class="section-heading">
+        <p class="eyebrow">THREE LESSONS</p>
+        <h2>Choose a topic</h2>
+      </div>
+      <div class="lesson-grid">
+        <a class="lesson-link-card teal" href="#week7"><span class="lesson-number">01</span><h3>Singly Linked List</h3><p>Store and manage student IDs using connected nodes.</p><span>Open lesson →</span></a>
+        <a class="lesson-link-card violet" href="#week9"><span class="lesson-number">02</span><h3>Doubly Linked List</h3><p>Move through data in both forward and backward directions.</p><span>Open lesson →</span></a>
+        <a class="lesson-link-card orange" href="#week10"><span class="lesson-number">03</span><h3>Queue Structures</h3><p>Compare linear, circular, and priority queues.</p><span>Open lesson →</span></a>
+      </div>
+    </section>
+
+    <!-- WEEK 7–8 -->
+    <section class="lesson section" id="week7">
+      <div class="lesson-title-row">
+        <div><p class="eyebrow">WEEK 7–8 · LESSON 01</p><h2>Singly Linked List <span>(Student IDs)</span></h2></div>
+        <span class="topic-badge">ONE-WAY CONNECTION</span>
+      </div>
+      <div class="content-grid">
+        <article class="explanation-card">
+          <h3>What is a singly linked list?</h3>
+          <p>A singly linked list stores data in separate <strong>nodes</strong>. Every node has a value and a link called <code>next</code> that points to the next node. The last node points to <code>NULL</code>.</p>
+          <ul class="check-list">
+            <li>Accept five student IDs.</li>
+            <li>Display all IDs in the list.</li>
+            <li>Search for one student ID.</li>
+            <li>Delete a selected ID and display the updated list.</li>
+          </ul>
+        </article>
+        <article class="diagram-card">
+          <p class="diagram-label">NODE DIAGRAM</p>
+          <div class="static-list-diagram">
+            <span class="pointer-label">HEAD</span>
+            <div class="diagram-node"><b>ID: 2026001</b><small>next</small></div><i>→</i>
+            <div class="diagram-node"><b>ID: 2026002</b><small>next</small></div><i>→</i>
+            <div class="diagram-node null-node">NULL</div>
+          </div>
+          <p class="muted">Each arrow goes in one direction only.</p>
+        </article>
+      </div>
+
+      <div class="code-output-grid">
+        <article class="code-card">
+          <div class="card-top"><h3>C++ sample — display only</h3><button class="copy-btn" data-copy="sllCode" type="button">Copy code</button></div>
+          <pre id="sllCode"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+struct Node {
+    string studentID;
+    Node* next;
+    Node(string id) : studentID(id), next(nullptr) {}
+};
+
+void display(Node* head) {
+    for (Node* current = head; current != nullptr; current = current-&gt;next)
+        cout &lt;&lt; current-&gt;studentID &lt;&lt; " ";
+    cout &lt;&lt; endl;
+}
+
+bool search(Node* head, const string&amp; id) {
+    for (Node* current = head; current != nullptr; current = current-&gt;next)
+        if (current-&gt;studentID == id) return true;
+    return false;
+}
+
+void deleteID(Node*&amp; head, const string&amp; id) {
+    Node* current = head;
+    Node* previous = nullptr;
+    while (current != nullptr &amp;&amp; current-&gt;studentID != id) {
+        previous = current;
+        current = current-&gt;next;
+    }
+    if (current == nullptr) return; // ID not found
+    if (previous == nullptr) head = head-&gt;next;
+    else previous-&gt;next = current-&gt;next;
+    delete current;
+}</code></pre>
+        </article>
+        <article class="output-card"><h3>Sample output</h3><pre>Student IDs: 2026001 2026002 2026003 2026004 2026005
+Search 2026003: ID found
+Delete 2026002
+Updated list: 2026001 2026003 2026004 2026005</pre></article>
+      </div>
+
+      <!-- JavaScript learning demo, not a C++ compiler. -->
+      <article class="demo-card" aria-labelledby="sllDemoTitle">
+        <div class="demo-heading"><div><p class="eyebrow">TRY IT IN JAVASCRIPT</p><h3 id="sllDemoTitle">Student ID linked-list demo</h3></div><span class="demo-counter" id="sllCounter">0 / 5 IDs</span></div>
+        <p class="demo-note">This visual demo simulates the activity. It does not run C++ code.</p>
+        <div class="demo-controls two-rows">
+          <label>Student ID<input id="sllInput" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 2026001" /></label>
+          <button class="button button-primary" id="sllAdd" type="button">Add ID</button>
+          <button class="button button-outline" id="sllDisplay" type="button">Display</button>
+          <label>Search / delete ID<input id="sllActionInput" type="text" inputmode="numeric" maxlength="12" placeholder="Enter an ID" /></label>
+          <button class="button button-outline" id="sllSearch" type="button">Search</button>
+          <button class="button button-danger" id="sllDelete" type="button">Delete</button>
+        </div>
+        <p class="status-message" id="sllStatus" role="status" aria-live="polite">Add up to five student IDs to begin.</p>
+        <div class="visual-stage"><span class="visual-head">HEAD</span><div class="node-track" id="sllNodes"><p class="empty-state">No IDs in the linked list yet.</p></div><span class="visual-null">NULL</span></div>
+      </article>
+    </section>
+
+    <!-- WEEK 9 -->
+    <section class="lesson section alt-section" id="week9">
+      <div class="lesson-title-row">
+        <div><p class="eyebrow">WEEK 9 · LESSON 02</p><h2>Doubly Linked List</h2></div>
+        <span class="topic-badge">TWO-WAY CONNECTION</span>
+      </div>
+      <div class="content-grid">
+        <article class="explanation-card">
+          <h3>What makes it “doubly” linked?</h3>
+          <p>Each node has three parts: <code>prev</code> points to the previous node, <code>data</code> stores the value, and <code>next</code> points to the next node. Because of <code>prev</code>, we can traverse the list in both directions.</p>
+          <p>Use the values <strong>10, 20, 30, 40, 50</strong>. Search <strong>30</strong>, update <strong>20 to 25</strong>, delete <strong>40</strong>, then show the final list.</p>
+        </article>
+        <article class="diagram-card">
+          <p class="diagram-label">NODE DIAGRAM</p>
+          <div class="dll-diagram"><div class="dll-node"><small>prev</small><b>10</b><small>next</small></div><i>↔</i><div class="dll-node"><small>prev</small><b>20</b><small>next</small></div><i>↔</i><div class="dll-node"><small>prev</small><b>30</b><small>next</small></div></div>
+          <p class="muted">The double arrow shows that the list can move forward or backward.</p>
+        </article>
+      </div>
+      <div class="code-output-grid">
+        <article class="code-card">
+          <div class="card-top"><h3>C++ sample — display only</h3><button class="copy-btn" data-copy="dllCode" type="button">Copy code</button></div>
+          <pre id="dllCode"><code>#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node *prev, *next;
+    Node(int value) : data(value), prev(nullptr), next(nullptr) {}
+};
+
+void displayForward(Node* head) {
+    for (Node* p = head; p != nullptr; p = p-&gt;next)
+        cout &lt;&lt; p-&gt;data &lt;&lt; " ";
+    cout &lt;&lt; endl;
+}
+
+void displayBackward(Node* tail) {
+    for (Node* p = tail; p != nullptr; p = p-&gt;prev)
+        cout &lt;&lt; p-&gt;data &lt;&lt; " ";
+    cout &lt;&lt; endl;
+}
+
+bool update(Node* head, int oldValue, int newValue) {
+    for (Node* p = head; p != nullptr; p = p-&gt;next)
+        if (p-&gt;data == oldValue) { p-&gt;data = newValue; return true; }
+    return false;
+}
+
+void remove(Node*&amp; head, Node*&amp; tail, Node* p) {
+    if (p-&gt;prev) p-&gt;prev-&gt;next = p-&gt;next; else head = p-&gt;next;
+    if (p-&gt;next) p-&gt;next-&gt;prev = p-&gt;prev; else tail = p-&gt;prev;
+    delete p;
+}</code></pre>
+        </article>
+        <article class="output-card"><h3>Sample output</h3><pre>Forward:  10 20 30 40 50
+Backward: 50 40 30 20 10
+Search 30: Value found
+Update 20 to 25
+Delete 40
+Final forward:  10 25 30 50
+Final backward: 50 30 25 10</pre></article>
+      </div>
+      <article class="demo-card" aria-labelledby="dllDemoTitle">
+        <div class="demo-heading"><div><p class="eyebrow">TRY IT IN JAVASCRIPT</p><h3 id="dllDemoTitle">Doubly linked-list demo</h3></div><span class="demo-counter" id="dllCounter">0 / 5 values</span></div>
+        <p class="demo-note">Tip: Try 10, 20, 30, 40, 50 first, then update 20 to 25 and delete 40.</p>
+        <div class="demo-controls dll-controls">
+          <label>New integer<input id="dllInput" type="number" inputmode="numeric" placeholder="e.g. 10" /></label><button class="button button-primary" id="dllAdd" type="button">Add value</button>
+          <button class="button button-outline" id="dllForward" type="button">Forward</button><button class="button button-outline" id="dllBackward" type="button">Backward</button>
+          <label>Find / old value<input id="dllFindInput" type="number" inputmode="numeric" placeholder="e.g. 20" /></label><button class="button button-outline" id="dllSearch" type="button">Search</button>
+          <label>New value<input id="dllNewInput" type="number" inputmode="numeric" placeholder="e.g. 25" /></label><button class="button button-outline" id="dllUpdate" type="button">Update</button><button class="button button-danger" id="dllDelete" type="button">Delete</button>
+        </div>
+        <p class="status-message" id="dllStatus" role="status" aria-live="polite">Add up to five integer values to begin.</p>
+        <div class="visual-stage dll-stage"><span class="visual-head">HEAD</span><div class="node-track" id="dllNodes"><p class="empty-state">No values in the doubly linked list yet.</p></div><span class="visual-tail">TAIL</span></div>
+      </article>
+    </section>
+
+    <!-- WEEK 10–11 -->
+    <section class="lesson section" id="week10">
+      <div class="lesson-title-row">
+        <div><p class="eyebrow">WEEK 10–11 · LESSON 03</p><h2>Queue Data Structures</h2></div>
+        <span class="topic-badge">FIFO ORGANIZATION</span>
+      </div>
+      <div class="content-grid queue-intro-grid">
+        <article class="explanation-card"><h3>What is a queue?</h3><p>A queue follows <strong>FIFO</strong>: <em>First In, First Out</em>. The first item added at the <code>REAR</code> is the first item removed from the <code>FRONT</code>.</p><p>Common operations are <strong>Enqueue</strong> (add), <strong>Dequeue</strong> (remove), <strong>Peek</strong> (view front), and <strong>Display</strong>.</p></article>
+        <article class="queue-compare"><h3>Three queue types</h3><div><b>Linear</b><p>Items move in one line. A filled rear can cause a full state.</p></div><div><b>Circular</b><p>The rear wraps to the start, so freed spaces can be reused.</p></div><div><b>Priority</b><p>Removal is based on priority, not only arrival time.</p></div></article>
+      </div>
+      <article class="guide-card"><h3>Quick guide questions</h3><div class="guide-grid"><div><b>What happens when a full queue receives an enqueue?</b><p>It causes an <strong>overflow</strong>; no new item can be added.</p></div><div><b>What happens when dequeue is used on an empty queue?</b><p>It causes an <strong>underflow</strong>; there is nothing to remove.</p></div><div><b>Why use a circular queue?</b><p>It reuses spaces at the beginning after items are removed.</p></div><div><b>How does a priority queue remove items?</b><p>It removes by priority: smallest first in min-priority or largest first in max-priority.</p></div></div></article>
+      <div class="code-output-grid">
+        <article class="code-card">
+          <div class="card-top"><h3>C++ sample — display only</h3><button class="copy-btn" data-copy="queueCode" type="button">Copy code</button></div>
+          <pre id="queueCode"><code>#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+#include &lt;functional&gt;
+using namespace std;
+
+const int MAX = 5;
+
+class CircularQueue {
+    int data[MAX], frontIndex = 0, rearIndex = -1, count = 0;
+public:
+    bool enqueue(int value) {
+        if (count == MAX) return false; // full
+        rearIndex = (rearIndex + 1) % MAX;
+        data[rearIndex] = value; count++; return true;
+    }
+    bool dequeue(int&amp; removed) {
+        if (count == 0) return false; // empty
+        removed = data[frontIndex];
+        frontIndex = (frontIndex + 1) % MAX;
+        count--; return true;
+    }
+    void display() const {
+        for (int i = 0; i &lt; count; i++)
+            cout &lt;&lt; data[(frontIndex + i) % MAX] &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+};
+
+int main() {
+    int choice;
+    cout &lt;&lt; "1 Linear  2 Circular  3 Priority  4 Exit\n";
+    cin &gt;&gt; choice;
+    int values[] = {50, 10, 40, 20, 30};
+
+    if (choice == 1) { // Linear queue: FIFO
+        queue&lt;int&gt; linear;
+        for (int value : values) linear.push(value); // enqueue
+        cout &lt;&lt; "Front: " &lt;&lt; linear.front() &lt;&lt; "\nDisplay: ";
+        while (!linear.empty()) { cout &lt;&lt; linear.front() &lt;&lt; " "; linear.pop(); }
+    } else if (choice == 2) { // Circular queue
+        CircularQueue circular;
+        for (int value : values) circular.enqueue(value);
+        cout &lt;&lt; "Circular display: "; circular.display();
+    } else if (choice == 3) { // Priority queue
+        priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; minQueue;
+        priority_queue&lt;int&gt; maxQueue;
+        for (int value : values) { minQueue.push(value); maxQueue.push(value); }
+        cout &lt;&lt; "Min: ";
+        while (!minQueue.empty()) { cout &lt;&lt; minQueue.top() &lt;&lt; " "; minQueue.pop(); }
+        cout &lt;&lt; "\nMax: ";
+        while (!maxQueue.empty()) { cout &lt;&lt; maxQueue.top() &lt;&lt; " "; maxQueue.pop(); }
+    }
+}</code></pre>
+        </article>
+        <article class="output-card"><h3>Sample output</h3><pre>Menu: 1 Linear  2 Circular  3 Priority  4 Exit
+Enqueue: 50 10 40 20 30
+Linear queue: 50 10 40 20 30
+Peek: 50
+Min-priority: 10 20 30 40 50
+Max-priority: 50 40 30 20 10</pre></article>
+      </div>
+      <article class="demo-card" aria-labelledby="queueDemoTitle">
+        <div class="demo-heading"><div><p class="eyebrow">TRY IT IN JAVASCRIPT</p><h3 id="queueDemoTitle">Queue operations demo</h3></div><span class="demo-counter" id="queueCounter">0 / 5 items</span></div>
+        <div class="queue-demo-toolbar"><label>Queue type<select id="queueType"><option value="linear">1 · Linear Queue</option><option value="circular">2 · Circular Queue</option><option value="priority">3 · Priority Queue</option></select></label><fieldset class="priority-options" id="priorityOptions"><legend>Priority order</legend><label><input type="radio" name="priority" value="min" checked /> Min first</label><label><input type="radio" name="priority" value="max" /> Max first</label></fieldset></div>
+        <div class="demo-controls queue-controls"><label>Number<input id="queueInput" type="number" inputmode="numeric" placeholder="e.g. 50" /></label><button class="button button-primary" id="queueEnqueue" type="button">Enqueue</button><button class="button button-danger" id="queueDequeue" type="button">Dequeue</button><button class="button button-outline" id="queuePeek" type="button">Peek</button><button class="button button-outline" id="queueDisplay" type="button">Display</button></div>
+        <p class="status-message" id="queueStatus" role="status" aria-live="polite">Choose a queue type, then enqueue up to five numbers.</p>
+        <div class="queue-stage"><div class="queue-label front-label">FRONT</div><div class="queue-track" id="queueNodes"><p class="empty-state">The queue is empty.</p></div><div class="queue-label rear-label">REAR</div></div>
+      </article>
+    </section>
+
+    <!-- HOW TO USE -->
+    <section class="how-to section" id="how-to-use">
+      <div class="section-heading"><p class="eyebrow">HOW TO USE THIS WEBSITE</p><h2>Learn at your own pace</h2></div>
+      <ol class="steps-list"><li><span>1</span><div><h3>Navigate with the menu</h3><p>Use the sticky links at the top to jump to Home, a week lesson, or this guide.</p></div></li><li><span>2</span><div><h3>Read and copy the samples</h3><p>Study the explanation and press <strong>Copy code</strong> when you want a code sample for your notes.</p></div></li><li><span>3</span><div><h3>Use the interactive demos</h3><p>Add, search, update, delete, enqueue, or dequeue values to visualize each data structure.</p></div></li><li><span>4</span><div><h3>Switch the color mode</h3><p>Use the Dark/Light button at the top. Your chosen mode is remembered in this browser.</p></div></li><li><span>5</span><div><h3>Open it anywhere</h3><p>After publishing on GitHub Pages, open the link on a phone, tablet, or computer.</p></div></li></ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>Created by Abraham T. Araya III | BSIT 21010 | Bestlink College of the Philippines | © 2026</p><p>Submitted to Sir Arjohn Palermo</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
