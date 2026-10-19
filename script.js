@@ -4,6 +4,7 @@
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupMobileNavigation();
   setupTheme();
   setupCopyButtons();
   setupSinglyLinkedList();
@@ -30,6 +31,32 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>"]/g, character => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"
   }[character]));
+}
+
+// ---------- Compact mobile navigation ----------
+function setupMobileNavigation() {
+  const menuButton = document.getElementById("menuToggle");
+  const navigation = document.getElementById("primaryNav");
+  if (!menuButton || !navigation) return;
+
+  const closeMenu = () => {
+    navigation.classList.remove("is-open");
+    menuButton.setAttribute("aria-expanded", "false");
+  };
+
+  menuButton.addEventListener("click", () => {
+    const isOpen = navigation.classList.toggle("is-open");
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  // Close the menu after a learner chooses a section, keeping the screen clear.
+  navigation.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeMenu();
+  });
+  window.matchMedia("(min-width: 761px)").addEventListener("change", event => {
+    if (event.matches) closeMenu();
+  });
 }
 
 // ---------- Light / dark mode ----------
